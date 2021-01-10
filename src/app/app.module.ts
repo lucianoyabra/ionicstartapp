@@ -8,14 +8,30 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ComponentsModule } from './components/components.module';
+import { HttpClientModule } from '@angular/common/http';
+import { PipesModule } from './pipes/pipes.module';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    ComponentsModule,
+    PipesModule,
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+  ],
   providers: [
     StatusBar,
     SplashScreen,
+    SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
